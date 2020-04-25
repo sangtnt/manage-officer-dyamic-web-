@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.net.HttpCookie;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -22,7 +24,9 @@ public class LoginServlet extends HttpServlet {
 		String password= request.getParameter("password");
 		User user= UserModel.getDetails(username);
 		if (user!=null&&user.getPassword().equals(password)) {
-			Cookie cookie= new Cookie("_username", user.getUsername());
+			Cookie cookie= new Cookie("_username",user.getUsername());
+			cookie.setHttpOnly(true);
+			cookie.setMaxAge(60*60*24);
 			response.addCookie(cookie);
 			request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
 		}

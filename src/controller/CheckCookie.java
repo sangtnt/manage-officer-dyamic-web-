@@ -18,11 +18,13 @@ import models.UserModel;
 public class CheckCookie extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Cookie cookie=null;
 		Cookie[] cookies=request.getCookies();
-		for (Cookie cookie: cookies) {
-			String username=cookie.getName();
-			if (username.equals("_username")) {
-				User user= UserModel.getDetails(username);
+		User user=null;
+		for (int i=0; i<cookies.length; i++) {
+			cookie=cookies[i];
+			if (cookie.getName().equals("_username")) {
+				user= UserModel.getDetails(cookie.getValue());
 				if (user!=null) {
 					request.getRequestDispatcher("WEB-INF/views/index.jsp").forward(request, response);
 				}
