@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.net.HttpCookie;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,7 +27,8 @@ public class LoginServlet extends HttpServlet {
 			cookie.setHttpOnly(true);
 			cookie.setMaxAge(60*60*24);
 			response.addCookie(cookie);
-			request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
+			response.sendRedirect("ToHomeServlet");
+			return;
 		}
 		request.setAttribute("message", "Incorrect Username or Password!");
 		request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);

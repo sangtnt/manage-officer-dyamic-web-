@@ -26,10 +26,11 @@ public class CheckCookie extends HttpServlet {
 			if (cookie.getName().equals("_username")) {
 				user= UserModel.getDetails(cookie.getValue());
 				if (user!=null) {
-					request.getRequestDispatcher("WEB-INF/views/index.jsp").forward(request, response);
+					request.getRequestDispatcher("/ToHomeServlet").forward(request, response);
+					return;
 				}
 			}
 		}
-		request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 	}
 }

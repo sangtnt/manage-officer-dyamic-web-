@@ -30,6 +30,7 @@ import org.hibernate.cfg.Environment;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
+import Entities.Officer;
 import Entities.User;
 
 
@@ -79,7 +80,7 @@ public class JpaUtils {
 
 			public List<String> getManagedClassNames() {
 
-				return Arrays.asList(User.class.getName());//Classname.class.getName()
+				return Arrays.asList(User.class.getName(), Officer.class.getName());//Classname.class.getName()
 
 			}
 			@Override
