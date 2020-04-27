@@ -36,30 +36,40 @@
 	.address{
 		width: 200px
 	}
+	.object:hover{
+		background :#b5ffee;
+	}
+	thead{
+		background: #b3b3b3;
+	}
 </style>
 </head>
 <body>
 	<table class="table-officer">
 		<caption><h2>Officers info</h2></caption>
-		<tr>
-			<th>ID</th>
-			<th>Full name</th>
-			<th>Age</th>
-			<th>Sex</th>
-			<th class="address">Address</th>
-			<th colspan="2">Job</th>
-		</tr>
-		<c:forEach var="officer" items="${officers}">
-			<tr class="object">
-				<td>${officer.id}</td>
-				<td>${officer.fullname}</td>
-				<td>${officer.age}</td>
-				<td>${officer.sex }</td>
-				<td>${officer.address }</td>
-				<td>${officer.job }</td>
-				<td>${officer.jobProp}</td>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Full name</th>
+				<th>Age</th>
+				<th>Sex</th>
+				<th class="address">Address</th>
+				<th colspan="2">Job</th>
 			</tr>
-		</c:forEach>
+		</thead>
+		<tbody>
+			<c:forEach var="officer" items="${officers}">
+				<tr class="object">
+					<td>${officer.id}</td>
+					<td>${officer.fullname}</td>
+					<td>${officer.age}</td>
+					<td>${officer.sex }</td>
+					<td>${officer.address }</td>
+					<td>${officer.job }</td>
+					<td>${officer.jobProp}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 	<form method="post">
 		<table class="action">
@@ -143,7 +153,8 @@
 							formaction="DeleteServlet"
 					>Delete
 					</button>
-					<button type="reset"
+					<button id="reset"
+						 type="reset"
 					>Reset
 					</button>
 				</td>
@@ -181,6 +192,13 @@
 			var value=document.getElementById("job").value;
 			document.getElementById(value).classList.remove("prop");
 		});
+		document.getElementById("reset").addEventListener('click', function(){
+			if (document.getElementsByClassName("add-btn")[0].classList.contains("invalid-btn")){
+				document.getElementsByClassName("update-btn")[0].classList.add("invalid-btn");
+				document.getElementsByClassName("update-btn")[1].classList.add("invalid-btn");
+				document.getElementsByClassName("add-btn")[0].classList.remove("invalid-btn");
+			}
+		})
 	</script>
 </body>
 </html>
